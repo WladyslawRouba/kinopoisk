@@ -1,0 +1,41 @@
+.switch {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid #d7d8da;
+    background: var(--header-button-bg);
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: background 0.25s, border-color 0.25s;
+}
+
+.switch:hover {
+    background: var(--header-button-hover);
+}
+
+.iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.icon {
+    font-size: 22px;
+}
+
+
+.light .icon {
+    color: #111;
+    transform: rotate(0deg);
+}
+
+
+.dark .icon {
+    color: #f9f9f9;
+    transform: rotate(180deg);
+}
