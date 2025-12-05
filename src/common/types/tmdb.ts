@@ -1,6 +1,6 @@
 import type { Movie } from "@/common/types/movie.ts";
 
-export interface SearchMoviesResponse {
+export interface MoviesListResponse  {
     page: number;
     results: Movie[];
     total_pages: number;

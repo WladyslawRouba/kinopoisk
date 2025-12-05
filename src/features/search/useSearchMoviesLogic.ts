@@ -20,7 +20,6 @@ export const useSearchMoviesLogic = () => {
     const onInputChange = (value: string) => {
         setInputValue(value);
 
-        // Крестик (<input type="search">) → сбрасываем состояние
         if (value === "") {
             navigate("/search");
         }

@@ -38,6 +38,15 @@ body {
 
     --page-bg: #ffffff;
 }
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
 
 [data-theme="dark"] {
     --bg: #121314;

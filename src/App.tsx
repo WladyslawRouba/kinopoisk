@@ -11,19 +11,23 @@ import {Footer} from "@/components/Footer/Footer";
 function App() {
     return(
         <BrowserRouter>
-            <Header />
-            <main style={{ minHeight: "80vh" }}>
-                <Routes>
-                    <Route path="/" element={<MainPage />} />
-                    <Route path="/category/:type" element={<CategoryPage />} />
-                    <Route path="/filtered" element={<FilteredMoviesPage />} />
-                    <Route path="/search" element={<SearchPage />} />
-                    <Route path="/favorites" element={<FavoritesPage />} />
-                    <Route path="/movie/:id" element={<MovieDetailsPage />} />
-                    <Route path="*" element={<div>404 — Page Not Found</div>} />
-                </Routes>
-            </main>
-            <Footer />
+
+
+                <Header />
+                <main>
+                    <Routes>
+                        <Route path="/" element={<MainPage />} />
+                        <Route path="/category/:type" element={<CategoryPage />} />
+                        <Route path="/filtered" element={<FilteredMoviesPage />} />
+                        <Route path="/search" element={<SearchPage />} />
+                        <Route path="/favorites" element={<FavoritesPage />} />
+                        <Route path="/movie/:id" element={<MovieDetailsPage />} />
+                        <Route path="*" element={<div>404 — Page Not Found</div>} />
+                    </Routes>
+                </main>
+                <Footer />
+
+
         </BrowserRouter>
     )
 }

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { SearchMoviesRequest, SearchMoviesResponse } from "@/common/types/tmdb";
+import type { SearchMoviesRequest, MoviesListResponse  } from "@/common/types/tmdb";
 const API_KEY = import.meta.env.VITE_API_KEY;
 
 export const tmdbApi = createApi({
@@ -18,7 +18,37 @@ export const tmdbApi = createApi({
                     page: 1,},
             }),
         }),
-        searchMovies: builder.query<SearchMoviesResponse, SearchMoviesRequest>({
+        getTopRatedMovies: builder.query({
+            query: () => ({
+                url: "movie/top_rated",
+                params: {
+                    api_key: API_KEY,
+                    language: "en-US",
+                    page: 1,
+                },
+            }),
+        }),
+        getUpcomingMovies: builder.query({
+            query: () => ({
+                url: "movie/upcoming",
+                params: {
+                    api_key: API_KEY,
+                    language: "en-US",
+                    page: 1,
+                },
+            }),
+        }),
+        getNowPlayingMovies: builder.query({
+            query: () => ({
+                url: "movie/now_playing",
+                params: {
+                    api_key: API_KEY,
+                    language: "en-US",
+                    page: 1,
+                },
+            }),
+        }),
+        searchMovies: builder.query<MoviesListResponse , SearchMoviesRequest>({
             query: ({ query, page }) => ({
                 url: "search/movie",
                 params: {
@@ -33,4 +63,10 @@ export const tmdbApi = createApi({
 });
 
 
-export const { useGetPopularMoviesQuery, useSearchMoviesQuery } = tmdbApi;
+export const {
+    useGetPopularMoviesQuery,
+    useSearchMoviesQuery,
+    useGetTopRatedMoviesQuery,
+    useGetUpcomingMoviesQuery,
+    useGetNowPlayingMoviesQuery,
+} = tmdbApi;

@@ -1,0 +1,28 @@
+.page {
+    padding: 40px 80px;
+}
+
+.title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.subTitle {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 32px;
+    margin-top: 20px;
+    padding-bottom: 60px;
+}
+
+.empty {
+    margin-top: 40px;
+    font-size: 20px;
+    opacity: 0.6;
+}

@@ -1,0 +1,48 @@
+.section {
+    margin-top: 40px;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.viewMore {
+    color: #3b48f3;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
+}
+.viewMoreBtn {
+    padding: 6px 18px;
+    border-radius: 20px;
+    border: 1px solid #3b48f3;
+    color: #3b48f3;
+    font-size: 14px;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.2s ease;
+    font-weight: 500;
+}
+
+.viewMoreBtn:hover {
+    background: #3b48f3;
+    color: white;
+}
+

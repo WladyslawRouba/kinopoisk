@@ -2,6 +2,7 @@ import styles from "./SearchPage.module.css";
 import Pagination from "@mui/material/Pagination";
 import type { Movie } from "@/common/types/movie";
 import { useSearchMoviesLogic } from "@/features/search/useSearchMoviesLogic";
+import { MovieCard } from "@/components/MovieCard/MovieCard.tsx";
 
 export const SearchPage = () => {
     const {
@@ -22,7 +23,7 @@ export const SearchPage = () => {
         <div className={styles.wrapper}>
             <h2 className={styles.title}>Search Results</h2>
 
-            {/* SEARCH FIELD — ВСЕГДА показываем */}
+
             <div className={styles.searchRow}>
                 <input
                     type="search"
@@ -42,7 +43,6 @@ export const SearchPage = () => {
                 </button>
             </div>
 
-            {/* СТАТУСЫ */}
             {isQueryEmpty && (
                 <div className={styles.message}>
                     Enter a movie title to start searching
@@ -59,33 +59,16 @@ export const SearchPage = () => {
                 </div>
             )}
 
-            {/* GRID */}
+
             {!isLoading && !isQueryEmpty && !noResults && (
                 <>
                     <h3 className={styles.subtitle}>Results for "{query}"</h3>
 
                     <div className={styles.grid}>
                         {data?.results?.map((movie: Movie) => (
-                            <div key={movie.id} className={styles.card}>
-                                <div className={styles.posterWrapper}>
-                                    <img
-                                        className={styles.poster}
-                                        src={
-                                            movie.poster_path
-                                                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                                                : "/no-poster.png"
-                                        }
-                                        alt={movie.title}
-                                    />
-                                    <div className={styles.rating}>
-                                        {movie.vote_average.toFixed(1)}
-                                    </div>
-                                </div>
-                                <p className={styles.cardTitle}>{movie.title}</p>
-                            </div>
+                            <MovieCard key={movie.id} movie={movie} />
                         ))}
                     </div>
-
                     <div className={styles.pagination}>
                         <Pagination
                             count={Math.min(data?.total_pages ?? 0, 500)}
