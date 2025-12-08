@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "@/components/WelcomeSection/ WelcomeSection.module.css";
+import styles from "@/components/WelcomeSection/WelcomeSection.module.css";
 
 import { SearchBar } from "@/components/SearchBar/SearchBar";
 import { useGetPopularMoviesQuery } from "@/features/api/mdbApi";
@@ -11,7 +11,7 @@ export const WelcomeSection = () => {
     const navigate = useNavigate();
     const [search, setSearch] = useState("");
 
-    const { data } = useGetPopularMoviesQuery(null);
+    const { data } = useGetPopularMoviesQuery({ page: 1 });
 
     const backdrop = useMemo(() => {
         if (!data?.results) return "";
@@ -39,7 +39,7 @@ export const WelcomeSection = () => {
                     value={search}
                     onChange={setSearch}
                     onSearch={handleSearch}
-                    placeholder="Search for a movie"
+
                 />
             </div>
         </section>

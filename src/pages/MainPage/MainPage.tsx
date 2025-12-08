@@ -1,5 +1,6 @@
-import { WelcomeSection } from "@/components/WelcomeSection/WelcomeSection.tsx";
-import { MovieSection } from "@/components/MovieSection/MovieSection.tsx";
+import { WelcomeSection } from "@/components/WelcomeSection/WelcomeSection";
+import { MovieSection } from "@/components/MovieSection/MovieSection";
+
 import {
     useGetPopularMoviesQuery,
     useGetTopRatedMoviesQuery,
@@ -7,41 +8,41 @@ import {
     useGetNowPlayingMoviesQuery,
 } from "@/features/api/mdbApi";
 
-
 export const MainPage = () => {
-
-    const { data: popular } = useGetPopularMoviesQuery(null);
-    const { data: topRated } = useGetTopRatedMoviesQuery(null);
-    const { data: upcoming } = useGetUpcomingMoviesQuery(null);
-    const { data: nowPlaying } = useGetNowPlayingMoviesQuery(null);
-
+    const { data: popular }     = useGetPopularMoviesQuery({ page: 1 });
+    const { data: topRated }    = useGetTopRatedMoviesQuery({ page: 1 });
+    const { data: upcoming }    = useGetUpcomingMoviesQuery({ page: 1 });
+    const { data: nowPlaying }  = useGetNowPlayingMoviesQuery({ page: 1 });
 
     return (
-        <div>
-            <WelcomeSection />
+        <>
+            <WelcomeSection />  {/* FULL WIDTH */}
 
-            <MovieSection
-                title="Popular Movies"
-                movies={popular?.results ?? []}
-                link="/category/popular"
-            />
-            <MovieSection
-                title="Top Rated"
-                movies={topRated?.results}
-                link="/category/top-rated"
-            />
+            <div className="layout">
+                <MovieSection
+                    title="Popular Movies"
+                    movies={popular?.results ?? []}
+                    link="/category/popular"
+                />
 
-            <MovieSection
-                title="Upcoming"
-                movies={upcoming?.results}
-                link="/category/upcoming"
-            />
+                <MovieSection
+                    title="Top Rated Movies"
+                    movies={topRated?.results ?? []}
+                    link="/category/top_rated"
+                />
 
-            <MovieSection
-                title="Now Playing"
-                movies={nowPlaying?.results}
-                link="/category/now-playing"
-            />
-        </div>
+                <MovieSection
+                    title="Upcoming Movies"
+                    movies={upcoming?.results ?? []}
+                    link="/category/upcoming"
+                />
+
+                <MovieSection
+                    title="Now Playing Movies"
+                    movies={nowPlaying?.results ?? []}
+                    link="/category/now_playing"
+                />
+            </div>
+        </>
     );
 };

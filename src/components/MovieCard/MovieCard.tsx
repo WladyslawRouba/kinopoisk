@@ -45,7 +45,9 @@ export const MovieCard = ({ movie }: Props) => {
                 </button>
             </div>
 
-            <p className={styles.title}>{movie.title}</p>
+            <div className={styles.info}>
+                <p className={styles.title}>{movie.title}</p>
+            </div>
         </div>
     );
 };

@@ -1,0 +1,79 @@
+.panel {
+    width: 260px;
+    background: #f5f7ff;
+
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    background: var(--header-bg);
+    border: 1px solid var(--header-border);
+    padding: 20px;
+
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.rangeText {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.resetBtn {
+    padding: 10px 16px;
+    border-radius: 12px;
+    background: #4b69ff;
+    color: white;
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.resetBtn:hover {
+    background: #3a56d9;
+}
+.genresBox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.genre {
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: #f0f0f5;
+    border: 1px solid #d4d4e0;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.genre:hover {
+    background: #e3e3f0;
+}
+
+.genreActive {
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: #3b48f3;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+

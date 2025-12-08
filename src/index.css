@@ -16,11 +16,32 @@ html, body {
 body {
     background: var(--bg);
     color: var(--text);
-    margin: 0;
-    padding: 0;
     font-family: 'Inter', sans-serif;
     transition: background 0.25s, color 0.25s;
 }
+
+
+#app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.page-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.layout {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
 
 :root {
     --bg: #ffffff;
@@ -37,15 +58,6 @@ body {
     --header-button-hover: #f0f0f1;
 
     --page-bg: #ffffff;
-}
-#root {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-main {
-    flex: 1;
 }
 
 [data-theme="dark"] {
@@ -65,7 +77,27 @@ main {
     --page-bg: #121314;
 }
 
-
+/* transitions */
 a, button, input, div {
     transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.btn {
+    .pagination-dark .MuiPaginationItem-root {
+        color: var(--text) !important;
+        border-color: var(--text) !important;
+    }
+
+    .pagination-dark .MuiPaginationItem-root:hover {
+        background: var(--header-button-hover) !important;
+    }
+
+    .pagination-dark .Mui-selected {
+        background: #3b48f3 !important;
+        color: white !important;
+    }
+
+    .pagination-dark .MuiPaginationItem-ellipsis {
+        color: var(--text) !important;
+    }
 }

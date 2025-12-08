@@ -9,6 +9,13 @@ export interface MoviesListResponse  {
 
 export interface SearchMoviesRequest {
     query: string;
-    page: number;
+    page?: number;
 }
 
+export interface Genre {
+    id: number;
+    name: string;
+}
+export interface GenresResponse {
+    genres: Genre[];
+}

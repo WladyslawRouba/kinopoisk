@@ -1,0 +1,28 @@
+.wrapper {
+    width: 100%;
+    padding: 10px 0;
+}
+
+.label {
+    font-size: 15px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.label span {
+    color: #3b48f3;
+    font-weight: 600;
+}
+
+.slider {
+    color: #3b48f3 !important;
+}
+
+
+.slider :global(.MuiSlider-thumb) {
+    width: 16px;
+    height: 16px;
+    background: white;
+    border: 2px solid #3b48f3;
+    box-shadow: 0 0 4px;
+}
