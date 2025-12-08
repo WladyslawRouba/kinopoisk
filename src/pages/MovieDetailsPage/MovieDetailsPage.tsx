@@ -4,9 +4,10 @@ import {
     useGetMovieCreditsQuery,
     useGetSimilarMoviesQuery,
 } from "@/features/api/mdbApi";
-import styles from "./MovieDetailsPage.module.css";
-import { MovieCard } from "@/components/MovieCard/MovieCard.tsx";
 
+import styles from "./MovieDetailsPage.module.css";
+import { MovieCard } from "@/components/MovieCard/MovieCard";
+import { MovieDetailsSkeleton } from "@/components/Skeletons";
 
 const getPosterUrl = (path: string | null, size = "w500") =>
     path ? `https://image.tmdb.org/t/p/${size}${path}` : "/no-poster.png";
@@ -19,13 +20,33 @@ export const MovieDetailsPage = () => {
     const navigate = useNavigate();
     const movieId = Number(id);
 
-    const { data: movie, isLoading } = useGetMovieDetailsQuery(movieId);
+    const {
+        data: movie,
+        isLoading: isMovieLoading,
+        isError: isMovieError,
+    } = useGetMovieDetailsQuery(movieId);
+
     const { data: credits } = useGetMovieCreditsQuery({ movieId });
     const { data: similar } = useGetSimilarMoviesQuery(movieId);
 
 
-    if (isLoading) return <p>Loading...</p>;
-    if (!movie) return <p>Movie not found</p>;
+    if (isMovieError) {
+        return <p className={styles.error}>Failed to load movie details.</p>;
+    }
+
+
+    if (isMovieLoading) {
+        return (
+            <div className={styles.page}>
+                <MovieDetailsSkeleton />
+            </div>
+        );
+    }
+
+
+    if (!movie) {
+        return <p className={styles.error}>Movie not found.</p>;
+    }
 
     const cast = credits?.cast.slice(0, 6) ?? [];
     const similarMovies = similar?.results.slice(0, 6) ?? [];
@@ -69,7 +90,6 @@ export const MovieDetailsPage = () => {
                 </div>
             </div>
 
-
             <section className={styles.castSection}>
                 <h2>Cast</h2>
 
@@ -104,8 +124,6 @@ export const MovieDetailsPage = () => {
                     ))}
                 </div>
             </section>
-
-
         </div>
     );
 };

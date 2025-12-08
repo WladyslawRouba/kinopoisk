@@ -3,6 +3,7 @@ import { useGetFilteredMoviesQuery } from "@/features/api/mdbApi";
 import { FiltersPanel } from "@/features/filtering/ui/ FiltersPanel";
 import { MoviesGrid } from "@/components/MoviesGrid/MoviesGrid.tsx";
 import { PaginationBlock } from "@/components/PaginationBlock/PaginationBlock.tsx";
+import { FilteredMoviesSkeleton } from "./FilteredMoviesSkeleton";
 
 export const FilteredMoviesPage = () => {
     const {
@@ -28,6 +29,7 @@ export const FilteredMoviesPage = () => {
     const movies = data?.results ?? [];
     const totalPages = data?.total_pages ?? 1;
 
+    if (isLoading) return <FilteredMoviesSkeleton />;
     return (
         <div style={{ display: "flex", gap: "30px" }}>
             <FiltersPanel

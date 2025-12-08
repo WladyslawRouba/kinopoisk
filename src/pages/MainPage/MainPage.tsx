@@ -1,5 +1,6 @@
 import { WelcomeSection } from "@/components/WelcomeSection/WelcomeSection";
 import { MovieSection } from "@/components/MovieSection/MovieSection";
+import { MovieGridSkeleton } from "@/components/Skeletons";
 
 import {
     useGetPopularMoviesQuery,
@@ -9,39 +10,51 @@ import {
 } from "@/features/api/mdbApi";
 
 export const MainPage = () => {
-    const { data: popular }     = useGetPopularMoviesQuery({ page: 1 });
-    const { data: topRated }    = useGetTopRatedMoviesQuery({ page: 1 });
-    const { data: upcoming }    = useGetUpcomingMoviesQuery({ page: 1 });
-    const { data: nowPlaying }  = useGetNowPlayingMoviesQuery({ page: 1 });
+    const popularQuery = useGetPopularMoviesQuery({ page: 1 });
+    const topRatedQuery = useGetTopRatedMoviesQuery({ page: 1 });
+    const upcomingQuery = useGetUpcomingMoviesQuery({ page: 1 });
+    const nowPlayingQuery = useGetNowPlayingMoviesQuery({ page: 1 });
+
+    const isAnyLoading =
+        popularQuery.isFetching ||
+        topRatedQuery.isFetching ||
+        upcomingQuery.isFetching ||
+        nowPlayingQuery.isFetching;
 
     return (
         <>
-            <WelcomeSection />  {/* FULL WIDTH */}
+            <WelcomeSection />
 
             <div className="layout">
-                <MovieSection
-                    title="Popular Movies"
-                    movies={popular?.results ?? []}
-                    link="/category/popular"
-                />
+                {isAnyLoading ? (
+                    <MovieGridSkeleton />
+                ) : (
+                    <>
+                        <MovieSection
+                            title="Popular Movies"
+                            movies={popularQuery.data?.results ?? []}
+                            link="/category/popular"
+                        />
 
-                <MovieSection
-                    title="Top Rated Movies"
-                    movies={topRated?.results ?? []}
-                    link="/category/top_rated"
-                />
+                        <MovieSection
+                            title="Top Rated Movies"
+                            movies={topRatedQuery.data?.results ?? []}
+                            link="/category/top_rated"
+                        />
 
-                <MovieSection
-                    title="Upcoming Movies"
-                    movies={upcoming?.results ?? []}
-                    link="/category/upcoming"
-                />
+                        <MovieSection
+                            title="Upcoming Movies"
+                            movies={upcomingQuery.data?.results ?? []}
+                            link="/category/upcoming"
+                        />
 
-                <MovieSection
-                    title="Now Playing Movies"
-                    movies={nowPlaying?.results ?? []}
-                    link="/category/now_playing"
-                />
+                        <MovieSection
+                            title="Now Playing Movies"
+                            movies={nowPlayingQuery.data?.results ?? []}
+                            link="/category/now_playing"
+                        />
+                    </>
+                )}
             </div>
         </>
     );

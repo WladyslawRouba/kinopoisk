@@ -6,7 +6,6 @@ import {
 } from "@reduxjs/toolkit/query/react";
 import { setError } from "@/app/errorSlice";
 
-
 const rawBaseQuery = fetchBaseQuery({
     baseUrl: "https://api.themoviedb.org/3/",
     prepareHeaders(headers) {
@@ -22,6 +21,8 @@ export const customBaseQuery: BaseQueryFn<
     FetchBaseQueryError
 > = async (args, api, extraOptions) => {
     const result = await rawBaseQuery(args, api, extraOptions);
+
+
 
     if (result.error) {
         switch (result.error.status) {

@@ -1,76 +1,114 @@
-HEAD
-# kinopoisk
+🎬 Kinopoisk Demo — React + TypeScript + TMDB API
 
-# React + TypeScript + Vite
+Веб-приложение для поиска и просмотра информации о фильмах, созданное на основе TMDB API.  
+Поддерживает сортировку, фильтрацию, поиск, избранные фильмы, детальную страницу, переключение темы и полную обработку ошибок.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Стек технологий:
+- React 18
+- TypeScript
+- React Router v6
+- Redux Toolkit + RTK Query
+- Material UI (MUI)
+- CSS Modules
+- Zod (валидация ответов API)
+- TMDB REST API
+- LocalStorage
+- Skeletons / Loaders
+- Dark / Light Theme
 
-Currently, two official plugins are available:
+ Основной функционал:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Главная страница
+- Случайный фон из популярных фильмов
+- 4 секции: Popular, Top Rated, Upcoming, Now Playing
+- Кнопка «View More» → Category Page
 
-## React Compiler
+Category Movies Page
+- Категории: Popular / Top Rated / Upcoming / Now Playing
+- Пагинация
+- Подсветка активной категории
+- Сохранение выбранной категории в URL
+ 
+Search Movies
+- Поиск фильма по названию
+- Пагинация
+- Скелетоны в момент загрузки
+- Сообщения “Enter a movie title…” и “No results…”
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Filtered Movies Page
+- Сортировка (популярность, оценка, дата, алфавит)
+- Фильтрация по рейтингу (range slider + debounce)
+- Фильтрация по жанрам (мультивыбор)
+- Сброс фильтров
+- Пагинация
 
-## Expanding the ESLint configuration
+ Favorites Page
+- Добавление в избранное
+- Хранение в LocalStorage
+- Удаление при повторном клике
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+ Movie Details
+- Постер, описание, жанры, рейт, дата, длительность
+- Top-6 актёров
+- Similar movies
+- Кнопка “Back”
+- Zod-вылалидация данных
+- Скелетон загрузки
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+ Темная / светлая тема
+- CSS variables
+- Переключатель темы в Header
+- Сохранение в LocalStorage
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+ Глобальная обработка ошибок
+ Реализована через кастомный baseQuery + Snackbar:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Ошибки сети (FETCH_ERROR)
+- 401 — неверный токен
+- 404 — ресурс не найден
+- Ошибки парсинга ответа
+- Любые неизвестные ошибки
+- Уведомления пользователю через MUI Alert
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+404 Page
+- Страница для несуществующих маршрутов
+- Кнопка перехода на главную
+- Полная поддержка тёмной темы
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-``` a2955aa (kinopoisk: Header,Search Page,Welcome Section)
+ Установка и запуск:
+pnpm install
+pnpm dev
+
+Настройка TMDB API ключа:
+Создать .env:
+VITE_ACCESS_TOKEN=ВАШ_TOKEN
+
+Что было сделано в процессе разработки:
+
+🔹 Redux Toolkit и RTK Query
+Реализована архитектура state-management на Redux Toolkit (slices, selectors).
+Организована работа с API через RTK Query: кеширование, параллельные запросы, контроль состояний загрузки.
+Создан кастомный baseQuery для глобальной обработки ошибок: FETCH_ERROR, 401, 404, PARSING_ERROR.
+Настроены пользовательные уведомления через Snackbar.
+
+🔹 Архитектура проекта (Feature-Sliced подход)
+Проект структурирован по слоям, что упрощает масштабирование.
+Бизнес-логика вынесена в собственные хуки и feature-модули.
+UI-компоненты изолированы, переиспользуемы и типизированы.
+
+🔹 Работа с API и типами
+Выполнена типизация TMDB API при помощи TypeScript.
+Добавлена проверка данных через Zod, что повышает устойчивость приложения при изменениях API.
+
+🔹 UI и удобство взаимодействия
+Добавлены скелетоны загрузки и глобальный индикатор запроса (LinearProgress).
+Реализован механизм избранного с сохранением в LocalStorage.
+Введена поддержка тёмной и светлой темы на основе CSS-переменных.
+
+🔹 Навигация и логика приложения
+Организована работа с React Router v6: динамические маршруты, параметры URL.
+Добавлена фильтрация, сортировка, поиск, debouncing и пагинация.
+Созданы отдельные страницы: категории, поиск, избранное, детальная страница фильма.
+
+

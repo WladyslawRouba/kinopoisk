@@ -2,7 +2,8 @@ import styles from "./SearchPage.module.css";
 import Pagination from "@mui/material/Pagination";
 import type { Movie } from "@/common/types/movie";
 import { useSearchMoviesLogic } from "@/features/search/useSearchMoviesLogic";
-import { MovieCard } from "@/components/MovieCard/MovieCard.tsx";
+import { MovieCard } from "@/components/MovieCard/MovieCard";
+import { SearchSkeleton } from "./SearchSkeleton";
 
 export const SearchPage = () => {
     const {
@@ -43,17 +44,20 @@ export const SearchPage = () => {
                 </button>
             </div>
 
+
             {isQueryEmpty && (
                 <div className={styles.message}>
                     Enter a movie title to start searching
                 </div>
             )}
 
-            {isLoading && (
-                <div className={styles.message}>Loading…</div>
+
+            {isLoading && !isQueryEmpty && (
+                <SearchSkeleton />
             )}
 
-            {noResults && (
+
+            {noResults && !isLoading && (
                 <div className={styles.message}>
                     No matches found for "{query}"
                 </div>
@@ -69,6 +73,7 @@ export const SearchPage = () => {
                             <MovieCard key={movie.id} movie={movie} />
                         ))}
                     </div>
+
                     <div className={styles.pagination}>
                         <Pagination
                             count={Math.min(data?.total_pages ?? 0, 500)}

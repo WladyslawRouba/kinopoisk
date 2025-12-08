@@ -9,7 +9,7 @@ import { MovieCard } from "@/components/MovieCard/MovieCard";
 import { CategoryTabs } from "@/pages/CategoryPage/ui/CategoryTabs.tsx";
 import { PaginationBlock } from "@/components/PaginationBlock/PaginationBlock.tsx";
 import type { Movie } from "@/common/types/movie.ts";
-
+import { MovieGridSkeleton } from "@/components/Skeletons";
 import styles from "./CategoryPage.module.css";
 
 export const CategoryPage = () => {
@@ -26,7 +26,7 @@ export const CategoryPage = () => {
 
     const movies = data?.results ?? [];
     const totalPages = data?.total_pages ?? 1;
-
+    if (isLoading) return <MovieGridSkeleton />;
     return (
         <div className={styles.wrapper}>
             <CategoryTabs active={category} onResetPage={() => setPage(1)} />

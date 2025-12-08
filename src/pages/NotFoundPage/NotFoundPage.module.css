@@ -1,0 +1,33 @@
+.wrapper {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--text);
+}
+
+.code {
+    font-size: 120px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+
+.text {
+    font-size: 22px;
+    margin-bottom: 30px;
+    opacity: 0.7;
+}
+
+.btn {
+    padding: 10px 22px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background: #3b48f3;
+    color: white;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: #2e3bd8;
+}

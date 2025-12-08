@@ -10,12 +10,15 @@ import { SearchPage } from "@/pages/SearchPage/SearchPage";
 import { FavoritesPage } from "@/pages/FavoritesPage/FavoritesPage";
 import { MovieDetailsPage } from "@/pages/MovieDetailsPage/MovieDetailsPage";
 import { GlobalSnackbar } from "@/components/GlobalSnackbar/GlobalSnackbar";
+import { GlobalLoader } from "@/app/GlobalLoader.tsx";
+import { NotFoundPage } from "@/pages/NotFoundPage/NotFoundPage";
 
 
 
 function App() {
     return (
         <BrowserRouter>
+            <GlobalLoader />
             <div id="app-container">
                 <Header />
 
@@ -43,7 +46,8 @@ function App() {
                             <div className="layout"><MovieDetailsPage /></div>
                         } />
 
-                        <Route path="*" element={<div>404 — Page Not Found</div>} />
+                        <Route path="*" element={<NotFoundPage />} />
+
                     </Routes>
                 </main>
                 <GlobalSnackbar />

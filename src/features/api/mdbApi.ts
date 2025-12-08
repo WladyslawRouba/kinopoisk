@@ -20,12 +20,22 @@ export const tmdbApi = createApi({
     endpoints: (builder) => ({
 
 
-        getPopularMovies: builder.query<MoviesListResponse, { page?: number }>({
+       getPopularMovies: builder.query<MoviesListResponse, { page?: number }>({
             query: ({ page = 1 }) => ({
                 url: "movie/popular",
                 params: { ...BASE_PARAMS, page },
             }),
         }),
+       /* getPopularMovies: builder.query({
+            async queryFn({ page }, api, extra, baseQuery) {
+                await new Promise((r) => setTimeout(r, 1500));
+                return baseQuery({
+                    url: "movie/popular",
+                    params: { ...BASE_PARAMS, page },
+                });
+            },
+        }),*/
+
 
 
         getMoviesByCategory: builder.query<
